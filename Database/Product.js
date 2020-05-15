@@ -8,11 +8,11 @@ const productSchema = new Schema({
   image: {
     type: String,
     required: true,
-    validate: value => {
+    validate: (value) => {
       if (!validator.isURL(value)) {
         throw new Error({ error: "Invalid URL address" });
       }
-    }
+    },
   },
   category: [{ type: Schema.Types.ObjectId, ref: "Categorie" }],
   last_auction_price: { type: Number, default: "0" },
@@ -23,8 +23,8 @@ const productSchema = new Schema({
     {
       user: { type: Schema.Types.ObjectId, ref: "user" },
       price: { type: Number },
-      date: { type: Date }
-    }
+      date: { type: Date },
+    },
   ],
   // add imgs schema
   images: [],
@@ -32,10 +32,11 @@ const productSchema = new Schema({
 productSchema.index({ descreption: "text" });
 
 var Product = mongoose.model("Product", productSchema);
-
+// { initial_date: { $lte: new Date() }, end_date: { $gte: new Date() } }
 var getAll = function (callback) {
   Product.find(
-    { initial_date: { $lte: new Date() }, end_date: { $gte: new Date() } },
+    { initial_date: { $lte: new Date() } },
+
     (err, data) => {
       if (err) {
         callback(err, null);
@@ -45,7 +46,18 @@ var getAll = function (callback) {
     }
   );
 };
+///// waiting front to test
+var getByCategory = function (cat, callback) {
+  Product.find({ name: cat }).exec((err, product) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, product);
+    }
+  });
+};
 
+///
 var getOne = function (id, callback) {
   Product.findById(id)
     .populate("participants.user")
@@ -67,7 +79,7 @@ var searchFilter = function (descriptionfilter, callback) {
     {
       $text: { $search: descriptionfilter },
       initial_date: { $lte: new Date() },
-      end_date: { $gte: new Date() }
+      end_date: { $gte: new Date() },
     },
     (err, data) => {
       if (err) {
@@ -107,7 +119,6 @@ var completedPro = function (callback) {
       callback(err, null);
     } else {
       callback(null, data);
-
     }
   });
 };
