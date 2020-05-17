@@ -5,6 +5,7 @@ const userDataBase = require("../../Database/User");
 const authAdmin = (req, res, next) => {
   //compare the user's (from the data base) admin token to ours
   const id = req.body.id;
+
   req.body = {};
 
   if (!id) {

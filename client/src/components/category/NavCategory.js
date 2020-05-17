@@ -6,38 +6,39 @@ import {
   BrowserRouter as Router,
   Switch,
   Redirect,
-  Link
+  Link,
 } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, FormControl } from "react-bootstrap";
 
 class NavCategory extends React.Component {
   constructor(props) {
     super(props);
+    console.log("prooops", props);
     this.state = {
       categoryList: [],
-      bool: false
+      bool: false,
     };
   }
   componentDidMount() {
     this.hundleGetAllCategories();
   }
   hundleGetAllCategories() {
-    categoryService.getAllCategories().then(res => {
+    categoryService.getAllCategories().then((res) => {
       this.setState({
-        categoryList: res.data
+        categoryList: res.data,
       });
     });
   }
 
   handleClickCategory(category) {
-    categoryService.displayByCategory(category).then(res => {
+    categoryService.displayByCategory(category).then((res) => {
+      console.log("res caaaaaaaaaat", res);
       this.props.onClick(res.data);
     });
   }
 
   render() {
     return (
-
       // <div className='navcategory'>
       //   <Nav >
       //     <Navbar.Brand>Categories</Navbar.Brand>
@@ -57,25 +58,24 @@ class NavCategory extends React.Component {
       //   </Nav>
       // </div>
 
-
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand >Categories</Navbar.Brand>
+        <Navbar.Brand>Categories</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-
-            {this.state.categoryList.map(cat => {
+            {this.state.categoryList.map((cat) => {
               return (
                 <Nav.Link>
-                  <Link className="text-decoration-none text-white"
+                  <Link
+                    className="text-decoration-none text-white"
                     to="/"
-                    onClick={e => {
+                    onClick={(e) => {
                       this.handleClickCategory(cat.name);
                     }}
                   >
                     {cat.name}
-                  </Link></Nav.Link>
-
+                  </Link>
+                </Nav.Link>
               );
             })}
           </Nav>

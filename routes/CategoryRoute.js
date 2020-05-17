@@ -23,7 +23,7 @@ module.exports = (app) => {
     });
   };
   const getProductByCat = (req, res) => {
-    console.log(req.query.category);
+    console.log("catfrom front", req.query.category);
     Category.getAllProductByCategory(req.query.category, (err, data) => {
       if (err) {
         res.status(401).send(err);

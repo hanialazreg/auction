@@ -5,7 +5,9 @@ const UserDataBase = require("../Database/User.js");
 const bcrypt = require("bcryptjs");
 const User = mongoose.model("user");
 
-module.exports = app => {
+// authAdmin,
+
+module.exports = (app) => {
   app.post("/api/checkAdmin", authAdmin, (req, res) => {
     // console.log(req.body);
     res.status(201).json(req.body);
