@@ -19,7 +19,10 @@ class AddProduct extends React.Component {
       end_date: "",
       itemsCategory: [],
 
-      show: false
+      show: false,
+      setImage: [],
+      loading: false,
+      setLoading: false,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -29,9 +32,9 @@ class AddProduct extends React.Component {
   }
 
   handleGetAllCategories() {
-    categoryService.getAllCategories().then(res => {
+    categoryService.getAllCategories().then((res) => {
       this.setState({
-        itemsCategory: res.data
+        itemsCategory: res.data,
       });
     });
   }
@@ -40,10 +43,10 @@ class AddProduct extends React.Component {
 
     productService
       .add(this.state)
-      .then(res => {
+      .then((res) => {
         console.log("res", res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("myErr", err);
       });
   }
@@ -53,7 +56,7 @@ class AddProduct extends React.Component {
   }
   onChangeEndDate(e) {
     this.setState({
-      end_date: e.target.value
+      end_date: e.target.value,
       // duration:
       //   new Date(e.target.value).getTime() -
       //   new Date(this.state.initial_date).getTime()
@@ -63,25 +66,45 @@ class AddProduct extends React.Component {
   hundleChangeCategory(e) {
     e.preventDefault();
     this.setState({
-      category: e.target.value
+      category: e.target.value,
     });
   }
 
   showModalCategory() {
     this.setState({
-      show: true
+      show: true,
     });
   }
   onHideCategory() {
     this.setState({
-      show: false
+      show: false,
     });
     this.handleGetAllCategories();
   }
+  hundeluploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "load_test");
+    this.setState({ setLoading: true });
+
+    const res = await fetch(
+      "	https://api.cloudinary.com/v1_1/dxgzln4cr/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const file = await res.json();
+    console.log("reeeeeeeeeeeeeees", file);
+    this.setState({ setImage: file.secure_url, setLoading: false });
+    console.log("imaaageurl", this.state.setImage);
+  };
   render() {
     return (
       <div className="addProduct">
-        <Form onSubmit={e => this.handleSubmit(e)}>
+        <Form onSubmit={(e) => this.handleSubmit(e)}>
           <AddCategory
             showModal={this.state.show}
             onHide={() => this.onHideCategory()}
@@ -93,7 +116,7 @@ class AddProduct extends React.Component {
               type="text"
               placeholder="Product Name"
               value={this.state.name}
-              onChange={e => {
+              onChange={(e) => {
                 this.onChange(e);
               }}
               name="name"
@@ -108,7 +131,7 @@ class AddProduct extends React.Component {
               name="descreption"
               placeholder="Product Description"
               value={this.state.descreption}
-              onChange={e => {
+              onChange={(e) => {
                 this.onChange(e);
               }}
             />
@@ -121,7 +144,7 @@ class AddProduct extends React.Component {
               name="value"
               type="number"
               value={this.state.value}
-              onChange={e => {
+              onChange={(e) => {
                 this.onChange(e);
               }}
             />
@@ -133,7 +156,7 @@ class AddProduct extends React.Component {
             <input
               type="datetime-local"
               name="initial_date"
-              onChange={e => {
+              onChange={(e) => {
                 this.onChange(e);
               }}
             />
@@ -145,7 +168,7 @@ class AddProduct extends React.Component {
             <input
               type="datetime-local"
               name="end_date"
-              onChange={e => {
+              onChange={(e) => {
                 this.onChangeEndDate(e);
               }}
             />
@@ -158,7 +181,7 @@ class AddProduct extends React.Component {
               name="image"
               type="text"
               value={this.state.image}
-              onChange={e => {
+              onChange={(e) => {
                 this.onChange(e);
               }}
               placeholder="image"
@@ -172,7 +195,7 @@ class AddProduct extends React.Component {
               name="images"
               placeholder="Other images"
               value={this.state.images}
-              onChange={e => {
+              onChange={(e) => {
                 this.onChange(e);
               }}
             />
@@ -184,12 +207,12 @@ class AddProduct extends React.Component {
               <Form.Control
                 aria-describedby="basic-addon1"
                 as="select"
-                onChange={e => {
+                onChange={(e) => {
                   this.hundleChangeCategory(e);
                 }}
               >
                 <option>Choose...</option>
-                {this.state.itemsCategory.map(cat => {
+                {this.state.itemsCategory.map((cat) => {
                   return <option value={cat._id}>{cat.name}</option>;
                 })}
               </Form.Control>
@@ -209,6 +232,13 @@ class AddProduct extends React.Component {
             Add Product
           </Button>
         </Form>
+        <input
+          type="file"
+          name="test cloudinary"
+          onChange={(e) => {
+            this.hundeluploadImage(e);
+          }}
+        />
       </div>
     );
   }
