@@ -98,7 +98,8 @@ class AddProduct extends React.Component {
 
     const file = await res.json();
     console.log("reeeeeeeeeeeeeees", file);
-    this.setState({ setImage: file.secure_url, setLoading: false });
+    const finalState = this.state.setImage.concat(file.secure_url);
+    this.setState({ setImage: finalState, setLoading: false });
     console.log("imaaageurl", this.state.setImage);
   };
   render() {
@@ -235,6 +236,13 @@ class AddProduct extends React.Component {
         <input
           type="file"
           name="test cloudinary"
+          onChange={(e) => {
+            this.hundeluploadImage(e);
+          }}
+        />
+        <input
+          type="file"
+          name="test 2"
           onChange={(e) => {
             this.hundeluploadImage(e);
           }}
