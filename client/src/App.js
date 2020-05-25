@@ -12,14 +12,14 @@ import {
   NavDropdown,
   FormControl,
   Carousel,
-  Jumbotron
+  Jumbotron,
 } from "react-bootstrap";
 
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
 import Home from "./components/home";
 
-import Search from './components/search/Search';
+import Search from "./components/search/Search";
 
 import NavCategory from "./components/category/NavCategory";
 import Product from "./components/Product/Product.js";
@@ -28,6 +28,7 @@ import Admin from "./components/admin/Admin.js";
 import checkToken from "./services/checkToken";
 import signOutService from "./services/signOutServices";
 import productService from "./services/productService";
+import Charts from "./components/dashboard/charts";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -41,13 +42,13 @@ class App extends React.Component {
     this.state = {
       userInfo: {
         id: null,
-        name: null
+        name: null,
       },
       showModalSignUp: false,
       showModalLogin: false,
 
       products: [],
-      description: null
+      description: null,
     };
     this.changeUserName = this.changeUserName.bind(this);
     this.handleShow = this.handleShow.bind(this);
@@ -61,14 +62,14 @@ class App extends React.Component {
     this.setState({
       userInfo: {
         id,
-        name
-      }
+        name,
+      },
     });
   }
 
   componentDidMount() {
     //checks if the token is valid
-    checkToken.checkAuth(window.localStorage.getItem("token")).then(res => {
+    checkToken.checkAuth(window.localStorage.getItem("token")).then((res) => {
       if (res) {
         this.changeUserName(res.data._id, res.data.name);
       }
@@ -78,26 +79,26 @@ class App extends React.Component {
   hundleSignOut() {
     signOutService
       .signOut(this.state.userInfo.name)
-      .then(res => {
+      .then((res) => {
         if (res.data.deleted === "success") {
           localStorage.removeItem("token");
           this.setState({
             userInfo: {
               id: null,
-              name: null
-            }
+              name: null,
+            },
           });
         } else {
           console.log("not deleted");
         }
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }
 
   ////////////////////// view functions
   handleShow(target) {
     this.setState({
-      [`showModal${target}`]: !this.state[`showModal${target}`]
+      [`showModal${target}`]: !this.state[`showModal${target}`],
     });
   }
   /////////////////////// search functions
@@ -107,22 +108,19 @@ class App extends React.Component {
   ///////////////////////product functions
   // send a get request to ..../search
 
-
   ////////////////////////  chategoies
 
   handleClickCategory(data) {
-
     this.setState({
-      products: data[0].products
+      products: data[0].products,
     });
   }
   onClickSearch(data) {
-    console.log('category data======>', data[0].products)
+    console.log("category data======>", data[0].products);
     this.setState({
-      products: data
+      products: data,
     });
   }
-
 
   render() {
     return (
@@ -169,23 +167,21 @@ class App extends React.Component {
                     </Nav.Link>
                   </Nav>
                 ) : (
-                    <Nav className="mr-auto">
-                      <Nav.Link>{this.state.userInfo.name}</Nav.Link>
-                      <Nav.Link
-                        onClick={() => {
-                          this.hundleSignOut();
-                        }}
-                      >
-                        SignOut
+                  <Nav className="mr-auto">
+                    <Nav.Link>{this.state.userInfo.name}</Nav.Link>
+                    <Nav.Link
+                      onClick={() => {
+                        this.hundleSignOut();
+                      }}
+                    >
+                      SignOut
                     </Nav.Link>
-                    </Nav>
-                  )}
-
+                  </Nav>
+                )}
 
                 <Search onClick={(data) => this.onClickSearch(data)}></Search>
               </Navbar.Collapse>
             </Navbar>
-
           </Switch>
 
           <div>
@@ -213,21 +209,17 @@ class App extends React.Component {
               </div> */}
             {/* </Jumbotron> */}
             <NavCategory
-              onClick={data => {
+              onClick={(data) => {
                 this.handleClickCategory(data);
               }}
             />
           </div>
-
-
-
 
           <Route
             exact
             path="/"
             component={() => <Home products={this.state.products} />}
           />
-
 
           <Route
             exact
@@ -245,8 +237,14 @@ class App extends React.Component {
             path="/admin"
             component={() => <Admin userInfo={this.state.userInfo} />}
           />
+
+          <Route
+            exact
+            path="/admindashboard"
+            component={() => <Charts userInfo={this.state.userInfo} />}
+          />
         </Router>
-      </div >
+      </div>
     );
   }
 }
