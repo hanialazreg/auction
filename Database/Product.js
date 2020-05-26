@@ -35,12 +35,7 @@ var Product = mongoose.model("Product", productSchema);
 // { initial_date: { $lte: new Date() }, end_date: { $gte: new Date() } }
 var getAll = function (callback) {
   Product.find(
-    {
-      initial_date: {
-        initial_date: { $lte: new Date() },
-        end_date: { $gte: new Date() },
-      },
-    },
+    { initial_date: { $lte: new Date() } },
 
     (err, data) => {
       if (err) {
@@ -53,7 +48,7 @@ var getAll = function (callback) {
 };
 ///// waiting front to test
 var getByCategory = function (cat, callback) {
-  Product.find({ name: cat }).exec((err, product) => {
+  Product.find({ category: cat }).exec((err, product) => {
     if (err) {
       callback(err, null);
     } else {
@@ -132,3 +127,4 @@ module.exports.getOne = getOne;
 module.exports.searchFilter = searchFilter;
 module.exports.findWinner = findWinner;
 module.exports.completedPro = completedPro;
+module.exports.getByCategory = getByCategory;

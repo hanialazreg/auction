@@ -13,8 +13,7 @@
   }
 } */
 body {
-  background: url("http://www.sothebys.com/content/dam/stb/lots/L17/L17021/285L17021_9CBZZ.jpg");
-  background-size: cover;
+  background-color: white;
 }
 /* .link{
    width: 500px;
@@ -72,7 +71,7 @@ body {
   padding-bottom: 15px;
 }
 
-#productTable{
+#productTable {
   background-color: #918982;
 }
 
@@ -235,11 +234,15 @@ body {
 
 .addProduct form {
   padding: 20px;
- 
-
 }
 
 .winner {
   color: green;
   font-size: 1.1em;
+}
+.col_nav {
+  background-color: #ff9300;
+}
+.btn_search {
+  border-color: white;
 }

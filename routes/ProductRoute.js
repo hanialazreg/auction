@@ -38,6 +38,21 @@ module.exports = (app) => {
     });
   };
   app.get("/api/product", getProductById);
+  // last for product by category
+  const getByCat = (req, res) => {
+    let cat = req.params.category;
+    Products.getByCategory(cat, (err, data) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.status(200).send(data);
+        res.end();
+      }
+    });
+  };
+
+  app.get("api/productByCat", getByCat);
+  //
 
   // just for admin add or update in case of error of insertion
   // question if the admin make a mistake on adding a product can he update if ?????

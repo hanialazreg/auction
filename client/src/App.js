@@ -143,7 +143,7 @@ class App extends React.Component {
             changeUserName={this.changeUserName}
           />
           <Switch>
-            <Navbar bg="light" expand="lg">
+            <Navbar className="col_nav" expand="lg">
               <Link to="/">
                 <Navbar.Brand>Auction</Navbar.Brand>
               </Link>

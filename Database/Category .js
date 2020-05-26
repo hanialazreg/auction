@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const categorySchema = new Schema({
   name: { type: String, unique: true },
-  products: [{ type: Schema.Types.ObjectId, ref: "Product" }]
+  products: [{ type: Schema.Types.ObjectId, ref: "Product" }],
 });
 
 const Category = mongoose.model("Category", categorySchema);
@@ -27,10 +27,10 @@ var updateProductCategory = function (idCategory, idProduct, callback) {
     { $addToSet: { products: idProduct } },
     { new: true }
   )
-    .then(doc => {
+    .then((doc) => {
       callback(doc);
     })
-    .catch(err => {
+    .catch((err) => {
       callback(err);
     });
 };
@@ -47,14 +47,13 @@ var deleteCategory = function (nameCategory, callback) {
 
 var getAllProductByCategory = function (categoryName, callback) {
   Category.find({ name: categoryName })
-    .populate(
-      {
-        path: "products",
-        match: {
-          initial_date: { $lte: new Date() },
-          end_date: { $gte: new Date() }
-        }
-      })
+    .populate({
+      path: "products",
+      match: {
+        initial_date: { $lte: new Date() },
+        end_date: { $gte: new Date() },
+      },
+    })
     .exec((err, category) => {
       if (err) {
         callback(err, null);

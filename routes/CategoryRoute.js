@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Category = require("../Database/Category ");
+const Products = require("../Database/Product");
 module.exports = (app) => {
   ///
   const addCat = (req, res) => {
@@ -29,6 +30,7 @@ module.exports = (app) => {
         res.status(401).send(err);
       } else {
         res.status(200).send(data);
+        console.log("data caaaat", data);
       }
     });
   };
