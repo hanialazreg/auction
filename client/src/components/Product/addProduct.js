@@ -233,16 +233,31 @@ class AddProduct extends React.Component {
             Add Product
           </Button>
         </Form>
+
         <input
           type="file"
-          name="test cloudinary"
+          name="global"
           onChange={(e) => {
             this.hundeluploadImage(e);
           }}
         />
         <input
           type="file"
-          name="test 2"
+          name="left"
+          onChange={(e) => {
+            this.hundeluploadImage(e);
+          }}
+        />
+        <input
+          type="file"
+          name="right"
+          onChange={(e) => {
+            this.hundeluploadImage(e);
+          }}
+        />
+        <input
+          type="file"
+          name="top"
           onChange={(e) => {
             this.hundeluploadImage(e);
           }}

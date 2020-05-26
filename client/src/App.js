@@ -145,7 +145,7 @@ class App extends React.Component {
           <Switch>
             <Navbar bg="light" expand="lg">
               <Link to="/">
-                <Navbar.Brand>RBK Auction</Navbar.Brand>
+                <Navbar.Brand>Auction</Navbar.Brand>
               </Link>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
