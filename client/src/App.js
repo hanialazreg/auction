@@ -152,6 +152,7 @@ class App extends React.Component {
                 {!this.state.userInfo.name ? (
                   <Nav className="mr-auto">
                     <Nav.Link
+                      className="links_nav"
                       onClick={() => {
                         this.handleShow("SignUp");
                       }}
@@ -159,6 +160,7 @@ class App extends React.Component {
                       SignUp
                     </Nav.Link>
                     <Nav.Link
+                      className="links_nav"
                       onClick={() => {
                         this.handleShow("Login");
                       }}

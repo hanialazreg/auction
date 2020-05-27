@@ -10,7 +10,7 @@ class SignUp extends React.Component {
       email: "",
       password: "",
       alert: { state: false, text: "", variant: "" },
-      showModal: true
+      showModal: true,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -19,14 +19,14 @@ class SignUp extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    signUpService.getAll(this.state).then(res => {
+    signUpService.getAll(this.state).then((res) => {
       if (res.status === 404) {
         this.setState({
           alert: {
             state: true,
             text: res.data._message || res.data,
-            variant: "danger"
-          }
+            variant: "danger",
+          },
         });
       }
       if (res.status === 200) {
@@ -34,8 +34,8 @@ class SignUp extends React.Component {
           alert: {
             state: true,
             variant: "success",
-            text: "Sign up Successful wait to be reddirected "
-          }
+            text: "Sign up Successful wait to be reddirected ",
+          },
         });
         // this.props.changeUserName(res.data.user._id, res.data.user.name); // res.data is  json ??? problem in the back end i guess
 
@@ -47,7 +47,7 @@ class SignUp extends React.Component {
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
-      alert: { ...this.state.alert, state: false }
+      alert: { ...this.state.alert, state: false },
     });
   }
 
@@ -73,7 +73,7 @@ class SignUp extends React.Component {
           </Alert>
           <div id="dataError"></div>
           <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
+            <Form.Label className="lablsF">Name</Form.Label>
             <Form.Control
               name="name"
               value={this.state.value}
@@ -85,7 +85,7 @@ class SignUp extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="email">
-            <Form.Label>Email </Form.Label>
+            <Form.Label className="lablsF">Email </Form.Label>
             <Form.Control
               name="email"
               value={this.state.value}
@@ -100,7 +100,7 @@ class SignUp extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="lablsF">Password</Form.Label>
             <Form.Control
               name="password"
               value={this.state.value}
@@ -111,7 +111,7 @@ class SignUp extends React.Component {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="secondary" type="submit">
             SignUp
           </Button>
         </Form>

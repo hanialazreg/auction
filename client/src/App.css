@@ -215,7 +215,7 @@ body {
   align-items: center;
 }
 .signup form {
-  padding: 20px;
+  padding: 80px;
 }
 
 /******************************/
@@ -241,8 +241,37 @@ body {
   font-size: 1.1em;
 }
 .col_nav {
-  background-color: #ff9300;
+  background-color: #5f9ea0;
 }
 .btn_search {
   border-color: white;
+}
+
+.links_nav {
+  color: white;
+}
+.cat_nav {
+  background-color: white;
+}
+.elemnt_cat {
+  color: #176163;
+  font-size: large;
+}
+.elemnt_cat :hover {
+}
+
+.cat_brand {
+  color: #176163;
+}
+.lablsF {
+  color: #5f9ea0;
+}
+.btn_signup {
+  background-color: #5f9ea0;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: teal;
+  border-color: #005a5a;
 }

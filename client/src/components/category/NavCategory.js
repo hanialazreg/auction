@@ -58,7 +58,7 @@ class NavCategory extends React.Component {
       //   </Nav>
       // </div>
 
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="lg" variant="dark" className="cat_nav">
         <Navbar.Brand>Categories</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -67,7 +67,7 @@ class NavCategory extends React.Component {
               return (
                 <Nav.Link>
                   <Link
-                    className="text-decoration-none text-white"
+                    className="text-decoration-none elemnt_cat "
                     to="/"
                     onClick={(e) => {
                       this.handleClickCategory(cat.name);

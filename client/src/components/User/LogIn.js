@@ -7,7 +7,7 @@ class LogIn extends React.Component {
     this.state = {
       email: "",
       password: "",
-      alert: { state: false, text: "", variant: "" }
+      alert: { state: false, text: "", variant: "" },
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,11 +16,11 @@ class LogIn extends React.Component {
   logIn() {
     logInServices
       .checkForLogIn(this.state)
-      .then(res => {
+      .then((res) => {
         // send the user the res.data
         if (res.status === 404) {
           this.setState({
-            alert: { state: true, text: res.data, variant: "danger" }
+            alert: { state: true, text: res.data, variant: "danger" },
           });
         }
         if (res.status === 200) {
@@ -29,7 +29,7 @@ class LogIn extends React.Component {
           this.props.handleShow("Login");
         }
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }
 
   handleSubmit(e) {
@@ -40,7 +40,7 @@ class LogIn extends React.Component {
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
-      alert: { ...this.state.alert, state: false }
+      alert: { ...this.state.alert, state: false },
     });
   }
 
@@ -61,7 +61,7 @@ class LogIn extends React.Component {
             {this.state.alert.text}
           </Alert>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
+            <Form.Label className="lablsF">Email</Form.Label>
             <Form.Control
               name="email"
               type="email"
@@ -73,7 +73,7 @@ class LogIn extends React.Component {
             </Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="lablsF">Password</Form.Label>
             <Form.Control
               name="password"
               type="password"
@@ -82,7 +82,7 @@ class LogIn extends React.Component {
             />
           </Form.Group>
           <Form.Group className="text-center">
-            <Button variant="primary" type="submit">
+            <Button variant="secondary" type="submit">
               Login
             </Button>
           </Form.Group>
