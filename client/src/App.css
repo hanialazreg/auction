@@ -108,6 +108,8 @@ body {
 }
 .minTitle {
   height: 55px;
+  color: #5f9ea0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 .cardTextM {
   overflow: hidden;
@@ -119,6 +121,7 @@ body {
   /* The number of lines to be displayed */
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  font-style: italic;
 }
 .mProduct:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
