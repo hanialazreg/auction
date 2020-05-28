@@ -130,14 +130,16 @@ body {
   transform: translateY(-2px);
 }
 .price {
-  color: #99f;
+  color: #8a8685;
+  font-weight: 400;
+  font-family: proxima_nova_regular, Tahoma, Geneva, sans-serif;
 }
 .timer {
   color: #453932;
 
   font-size: 1.2em;
   height: auto;
-  font-weight: bold;
+  font-weight: 600;
   line-height: normal;
 }
 .auctionPrice {
@@ -232,7 +234,7 @@ body {
   border: 1px solid #ccc;
   float: left;
   font-size: 1em;
-  background-color: #918982;
+  background-color: #edeae8;
 }
 
 .addProduct form {

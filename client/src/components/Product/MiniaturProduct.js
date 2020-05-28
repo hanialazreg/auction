@@ -9,8 +9,7 @@ class MiniaturProduct extends React.Component {
     super(props);
     this.state = {
       // this.props.product.initil_date).getTime() +
-      timer:
-        new Date(this.props.product.end_date)
+      timer: new Date(this.props.product.end_date),
     };
   }
 
@@ -39,10 +38,7 @@ class MiniaturProduct extends React.Component {
             <Row>
               <Col xs={12} md={7} className="timer">
                 {" "}
-                <Countdown
-                  date={this.state.timer}
-
-                />
+                <Countdown date={this.state.timer} />
               </Col>
               {/* xs={6} */}
               <Col md={5} className="auctionPrice text-right">
@@ -51,7 +47,9 @@ class MiniaturProduct extends React.Component {
             </Row>
             <Row>
               {/* md={{ span: 4, offset: 8 }} */}
-              <Col className="price text-right">{this.props.product.value}</Col>
+              <Col className="price text-right">
+                value:{this.props.product.value}
+              </Col>
             </Row>
           </Card.Body>
         </Card>

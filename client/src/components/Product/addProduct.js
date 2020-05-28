@@ -112,7 +112,7 @@ class AddProduct extends React.Component {
           ></AddCategory>
 
           <Form.Group controlId="formGridName">
-            <Form.Label>Name</Form.Label>
+            <Form.Label className="lablsF">Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Product Name"
@@ -125,7 +125,7 @@ class AddProduct extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="exampleForm.ControlDescription">
-            <Form.Label>Description</Form.Label>
+            <Form.Label className="lablsF">Description</Form.Label>
             <Form.Control
               as="textarea"
               rows="3"
@@ -139,7 +139,7 @@ class AddProduct extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="formGridPriceValue">
-            <Form.Label>Price Value</Form.Label>
+            <Form.Label className="lablsF">Price Value</Form.Label>
             <Form.Control
               placeholder="Product Price"
               name="value"
@@ -152,7 +152,7 @@ class AddProduct extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="formGridStartDate">
-            <Form.Label>Start Date</Form.Label>
+            <Form.Label className="lablsF">Start Date</Form.Label>
             {/* <DatePicker selected={new Date()}></DatePicker> */}
             <input
               type="datetime-local"
@@ -164,7 +164,7 @@ class AddProduct extends React.Component {
             {/* <Form.Control name="initial_date" type="date" value={this.state.initial_date} onChange={(e) => { this.onChange(e) }} /> */}
           </Form.Group>
           <Form.Group controlId="formGridStartDate">
-            <Form.Label>End Date</Form.Label>
+            <Form.Label className="lablsF">End Date</Form.Label>
             {/* <DatePicker selected={new Date()}></DatePicker> */}
             <input
               type="datetime-local"
@@ -177,7 +177,7 @@ class AddProduct extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="exampleForm.ControlImage">
-            <Form.Label>Image</Form.Label>
+            <Form.Label className="lablsF">Image</Form.Label>
             <Form.Control
               name="image"
               type="text"
@@ -189,7 +189,7 @@ class AddProduct extends React.Component {
             />
           </Form.Group>
           <Form.Group controlId="exampleForm.ControlImages">
-            <Form.Label>Images</Form.Label>
+            <Form.Label className="lablsF">Images</Form.Label>
             <Form.Control
               as="textarea"
               rows="3"
@@ -203,7 +203,7 @@ class AddProduct extends React.Component {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Category</Form.Label>
+            <Form.Label className="lablsF">Category</Form.Label>
             <InputGroup>
               <Form.Control
                 aria-describedby="basic-addon1"
@@ -228,40 +228,38 @@ class AddProduct extends React.Component {
               {/* <Button variant="primary" onClick={() => this.showModalCategory()} >	Add Category		</Button> */}
             </InputGroup>
           </Form.Group>
-
-          <Button variant="primary" type="submit">
+          <input
+            type="file"
+            name="global"
+            onChange={(e) => {
+              this.hundeluploadImage(e);
+            }}
+          />
+          <input
+            type="file"
+            name="left"
+            onChange={(e) => {
+              this.hundeluploadImage(e);
+            }}
+          />
+          <input
+            type="file"
+            name="right"
+            onChange={(e) => {
+              this.hundeluploadImage(e);
+            }}
+          />
+          <input
+            type="file"
+            name="top"
+            onChange={(e) => {
+              this.hundeluploadImage(e);
+            }}
+          />
+          <Button variant="secondary" type="submit">
             Add Product
           </Button>
         </Form>
-
-        <input
-          type="file"
-          name="global"
-          onChange={(e) => {
-            this.hundeluploadImage(e);
-          }}
-        />
-        <input
-          type="file"
-          name="left"
-          onChange={(e) => {
-            this.hundeluploadImage(e);
-          }}
-        />
-        <input
-          type="file"
-          name="right"
-          onChange={(e) => {
-            this.hundeluploadImage(e);
-          }}
-        />
-        <input
-          type="file"
-          name="top"
-          onChange={(e) => {
-            this.hundeluploadImage(e);
-          }}
-        />
       </div>
     );
   }
