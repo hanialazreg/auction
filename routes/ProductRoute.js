@@ -59,9 +59,10 @@ module.exports = (app) => {
   const addProduct = (req, res) => {
     console.log(req.body);
 
+    console.log("lisssssssssst of images ", req.body.images);
     // images
-    req.body.images = req.body.images.split(",");
-
+    req.body.images = req.body.images.toString().split(",");
+    console.log("lisssssssssst of images ", req.body.images);
     Product.create(req.body, (err, result) => {
       if (err) {
         res.status(400).send(err);

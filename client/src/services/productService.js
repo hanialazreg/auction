@@ -8,7 +8,7 @@ export default {
         name: product.name,
         descreption: product.descreption,
         image: product.setImage[0],
-        images: product.setImage.shift(),
+        images: product.setImage,
         category: product.category,
         value: product.value,
         initial_date: product.initial_date,
