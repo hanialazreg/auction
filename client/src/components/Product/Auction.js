@@ -87,7 +87,7 @@ class Auction extends React.Component {
     this.setState({
       timer: false,
     });
-    if (this.state.participants) {
+    if (this.state.product.participants.length > 0) {
       auctionServices.getWinner(this.state.product._id).then((res) => {
         this.setState({
           winer: `Winner :${res.data[0].participants[0].user.name}`,
