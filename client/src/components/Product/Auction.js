@@ -8,7 +8,7 @@ import {
   Form,
   InputGroup,
   Accordion,
-  Alert
+  Alert,
 } from "react-bootstrap";
 import Countdown from "react-countdown-now";
 import openSocket from "socket.io-client";
@@ -23,9 +23,9 @@ class Auction extends React.Component {
       history: [{ user: { name: "" }, date: "" }],
       socket: openSocket("http://localhost:5000"),
       timer: true,
-      alerShow: false
+      alerShow: false,
     };
-    this.state.socket.on("new-auc", auc => {
+    this.state.socket.on("new-auc", (auc) => {
       if (auc._id === this.state.product._id) {
         this.setState({ product: auc, history: auc.participants });
       }
@@ -40,9 +40,8 @@ class Auction extends React.Component {
 
       history: newProps.product.participants || [],
       userInfo: newProps.userInfo,
-      handleShow: newProps.handleShow
+      handleShow: newProps.handleShow,
     });
-
   }
 
   testLogIn() {
@@ -68,17 +67,17 @@ class Auction extends React.Component {
             this.props.userInfo.id,
             Date.now()
           )
-          .then(res => {
+          .then((res) => {
             this.setState({
               product: res.data,
               history: res.data.participants,
-              alerShow: false
+              alerShow: false,
             });
             this.state.socket.emit("new-auc", res.data);
           });
       } else {
         this.setState({
-          alerShow: true
+          alerShow: true,
         });
       }
     }
@@ -86,13 +85,19 @@ class Auction extends React.Component {
 
   handletimerComplete() {
     this.setState({
-      timer: false
+      timer: false,
     });
-    auctionServices.getWinner(this.state.product._id).then(res => {
-      this.setState({
-        winer: `Winner :${res.data[0].participants[0].user.name}`
+    if (this.state.participants) {
+      auctionServices.getWinner(this.state.product._id).then((res) => {
+        this.setState({
+          winer: `Winner :${res.data[0].participants[0].user.name}`,
+        });
       });
-    });
+    } else {
+      this.setState({
+        winer: "no winner",
+      });
+    }
   }
   render() {
     return (
@@ -103,7 +108,6 @@ class Auction extends React.Component {
 
         <Card bg="light" className="auction">
           <Card.Body>
-
             <Card.Title className="text-center">
               <Card.Text>Value {this.state.product.value} DT</Card.Text>
             </Card.Title>
@@ -117,13 +121,13 @@ class Auction extends React.Component {
                   }}
                 />
               )) || (
-                  <Card.Text className="text-center">
-                    Auction closed{" "}
-                    <Row>
-                      <Col className="text-center winner">{this.state.winer}</Col>
-                    </Row>
-                  </Card.Text>
-                )}
+                <Card.Text className="text-center">
+                  Auction closed{" "}
+                  <Row>
+                    <Col className="text-center winner">{this.state.winer}</Col>
+                  </Row>
+                </Card.Text>
+              )}
             </Card.Header>
             <br />
             <Row>
@@ -133,8 +137,9 @@ class Auction extends React.Component {
                 </Card.Text>
               </Col>
               <Col className="text-right">
-                {(this.state.history[0] !== undefined) &&
-                  <Card.Text>{this.state.history[0].user.name} </Card.Text>}
+                {this.state.history[0] !== undefined && (
+                  <Card.Text>{this.state.history[0].user.name} </Card.Text>
+                )}
               </Col>
             </Row>
 
@@ -146,19 +151,18 @@ class Auction extends React.Component {
                 </Card.Text>
               </Col>
               <small className="text-muted">
-                {(this.state.history[0] !== undefined) && (
+                {this.state.history[0] !== undefined &&
                   new Date(this.state.history[0].date).getFullYear() +
-                  "-" +
-                  (new Date(this.state.history[0].date).getMonth() + 1) +
-                  "-" +
-                  new Date(this.state.history[0].date).getDate() +
-                  " " +
-                  new Date(this.state.history[0].date).getHours() +
-                  ":" +
-                  new Date(this.state.history[0].date).getMinutes() +
-                  ":" +
-                  new Date(this.state.history[0].date).getSeconds()
-                )}
+                    "-" +
+                    (new Date(this.state.history[0].date).getMonth() + 1) +
+                    "-" +
+                    new Date(this.state.history[0].date).getDate() +
+                    " " +
+                    new Date(this.state.history[0].date).getHours() +
+                    ":" +
+                    new Date(this.state.history[0].date).getMinutes() +
+                    ":" +
+                    new Date(this.state.history[0].date).getSeconds()}
               </small>
             </Row>
 
@@ -235,7 +239,7 @@ class Auction extends React.Component {
                     aria-describedby="dt"
                     min={this.state.product.last_auction_price}
                     value={this.state.auctionPrice}
-                    onChange={e =>
+                    onChange={(e) =>
                       this.setState({ auctionPrice: e.target.value })
                     }
                   />
@@ -265,7 +269,7 @@ class Auction extends React.Component {
 
             <Accordion.Collapse eventKey="0">
               <Card.Body>
-                {this.state.history.map(auction => {
+                {this.state.history.map((auction) => {
                   return (
                     <Row>
                       <Col className="historyPrice text-left">
