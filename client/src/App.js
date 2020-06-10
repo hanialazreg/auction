@@ -33,6 +33,8 @@ import Charts from "./components/dashboard/charts";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
+import Collect from "./components/dashboard/collect.js";
+import Users from "./components/User/users.js";
 
 // han
 
@@ -170,7 +172,7 @@ class App extends React.Component {
                   </Nav>
                 ) : (
                   <Nav className="mr-auto">
-                    <Nav.Link>{this.state.userInfo.name}</Nav.Link>
+                    <Nav.Link href="/user">{this.state.userInfo.name}</Nav.Link>
                     <Nav.Link
                       onClick={() => {
                         this.hundleSignOut();
@@ -243,7 +245,12 @@ class App extends React.Component {
           <Route
             exact
             path="/admindashboard"
-            component={() => <Charts userInfo={this.state.userInfo} />}
+            component={() => <Collect userInfo={this.state.userInfo} />}
+          />
+          <Route
+            exact
+            path="/user"
+            component={() => <Users userInfo={this.state.userInfo} />}
           />
         </Router>
       </div>

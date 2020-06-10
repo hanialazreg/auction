@@ -280,3 +280,9 @@ body {
   background-color: teal;
   border-color: #005a5a;
 }
+.userInfo {
+  height: 50%;
+  width: 50%;
+  margin-top: 100px;
+  margin-left: 400px;
+}

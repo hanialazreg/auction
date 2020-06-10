@@ -33,9 +33,10 @@ productSchema.index({ descreption: "text" });
 
 var Product = mongoose.model("Product", productSchema);
 // { initial_date: { $lte: new Date() }, end_date: { $gte: new Date() } }
+// { initial_date: { $lte: new Date() } }
 var getAll = function (callback) {
   Product.find(
-    { initial_date: { $lte: new Date() } },
+    { initial_date: { $lte: new Date() }, end_date: { $gte: new Date() } },
 
     (err, data) => {
       if (err) {
@@ -112,6 +113,20 @@ var findWinner = function (idProduct, callback) {
       }
     });
 };
+// number of auctions
+var findParticipantAuction = function (userid, callback) {
+  var nbauction = 0;
+  Product.find({ _id: userid })
+    .populate("participants.user")
+    .exec((err, product) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        // nbauction++;
+        callback(null, product);
+      }
+    });
+};
 
 var completedPro = function (callback) {
   Product.find({ end_date: { $lte: new Date() } }, (err, data) => {
@@ -128,3 +143,4 @@ module.exports.searchFilter = searchFilter;
 module.exports.findWinner = findWinner;
 module.exports.completedPro = completedPro;
 module.exports.getByCategory = getByCategory;
+module.exports.findParticipantAuction = findParticipantAuction;

@@ -176,32 +176,6 @@ class AddProduct extends React.Component {
             {/* <Form.Control name="initial_date" type="date" value={this.state.initial_date} onChange={(e) => { this.onChange(e) }} /> */}
           </Form.Group>
 
-          <Form.Group controlId="exampleForm.ControlImage">
-            <Form.Label className="lablsF">Image</Form.Label>
-            <Form.Control
-              name="image"
-              type="text"
-              value={this.state.image}
-              onChange={(e) => {
-                this.onChange(e);
-              }}
-              placeholder="image"
-            />
-          </Form.Group>
-          <Form.Group controlId="exampleForm.ControlImages">
-            <Form.Label className="lablsF">Images</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows="3"
-              name="images"
-              placeholder="Other images"
-              value={this.state.images}
-              onChange={(e) => {
-                this.onChange(e);
-              }}
-            />
-          </Form.Group>
-
           <Form.Group>
             <Form.Label className="lablsF">Category</Form.Label>
             <InputGroup>

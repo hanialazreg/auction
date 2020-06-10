@@ -27,6 +27,7 @@
     "grunt": "^1.0.4",
     "grunt-shell": "^3.0.1",
     "install": "^0.13.0",
+    "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.7",
     "npm": "^6.13.6",

@@ -9,6 +9,7 @@ import Auction from "./Auction";
 class Product extends React.Component {
   constructor(props) {
     super(props);
+    console.log("the props", props);
     this.state = {
       product: {},
     };

@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const User = mongoose.model("user");
 const auth = require("./middleware/auth");
 
-module.exports = app => {
+module.exports = (app) => {
   app.post("/api/signup", (req, res, next) => {
     User.findOne({ email: req.body.email }, (err, data) => {
       if (err) return res.status(404).send(err);
@@ -17,9 +17,9 @@ module.exports = app => {
 
         var user = new User(req.body);
 
-        user.save(err => {
+        user.save((err) => {
           if (err) return res.status(404).json(err);
-          UserDataBase.generateAuthToken(user, token =>
+          UserDataBase.generateAuthToken(user, (token) =>
             res.status(200).send(`user created ${(user, token)}`)
           );
         });
@@ -38,7 +38,7 @@ module.exports = app => {
       }
       bcrypt
         .compare(req.body.password, user.password)
-        .then(comparisonRes => {
+        .then((comparisonRes) => {
           if (!comparisonRes) {
             return res.status(404).send("please check your credentials");
           }
@@ -46,7 +46,7 @@ module.exports = app => {
             res.status(200).send({ user, token })
           );
         })
-        .catch(err => err);
+        .catch((err) => err);
     });
   });
 
@@ -59,31 +59,10 @@ module.exports = app => {
     User.findOne({ name: req.body.userName }, (err, data) => {
       if (err) res.json(err);
       data.token = [];
-      data.save(err => {
+      data.save((err) => {
         if (err) res.json(err);
         res.status(201).json({ deleted: "success" });
       });
     });
   });
-  //   app.put(`/api/product/:id`, async (req, res) => {
-  //     const { id } = req.params;
-
-  //     let product = await Product.findByIdAndUpdate(id, req.body);
-
-  //     return res.status(202).send({
-  //       error: false,
-  //       product
-  //     });
-  //   });
-
-  //   app.delete(`/api/product/:id`, async (req, res) => {
-  //     const { id } = req.params;
-
-  //     let product = await Product.findByIdAndDelete(id);
-
-  //     return res.status(202).send({
-  //       error: false,
-  //       product
-  //     });
-  //   });
 };

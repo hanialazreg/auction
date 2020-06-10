@@ -124,6 +124,24 @@ module.exports = (app) => {
 
   app.get("/api/getwinner", getAuctionWinner);
 
+  const getAuctionByUser = (req, res) => {
+    let user = req.query.user;
+
+    Product.find(
+      { participants: { $elementMatch: { user: user } } },
+      (err, product) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          console.log("allllll", product);
+          res.status(200).send(product);
+          res.end();
+        }
+      }
+    );
+  };
+
+  app.get("/api/getauctionsByUser/:id", getAuctionByUser);
   // update availability
   // app.get("/api/product/:id", (req, res) => { this function might be moved too the front end
   //   // check if the initial_date + duration >= sysdate, if it is
@@ -187,4 +205,27 @@ module.exports = (app) => {
   app.get("/api/productWinner", getProductWinner);
 
   app.get("/api/");
+
+  ///////////////////////////////
+  app.put(`/api/product/:id`, async (req, res) => {
+    const { id } = req.params;
+
+    let product = await Product.findByIdAndUpdate(id, req.body);
+
+    return res.status(202).send({
+      error: false,
+      product,
+    });
+  });
+
+  //   app.delete(`/api/product/:id`, async (req, res) => {
+  //     const { id } = req.params;
+
+  //     let product = await Product.findByIdAndDelete(id);
+
+  //     return res.status(202).send({
+  //       error: false,
+  //       product
+  //     });
+  //   });
 };
